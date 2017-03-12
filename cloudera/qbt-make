@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# this is a qbt-make script designed to be a no-op build for illustration purposes.
+# It outputs to the console any dependencies made available to it, then writes
+# an "artifact" to its output directory.
+PKG_NAME="$PACKAGE_NAME"
+
+echo "Building $PKG_NAME..."
+
+for TYPE in strong weak; do
+    echo "Listing $TYPE dependencies:"
+    for i in $(find $INPUT_ARTIFACTS_DIR/$TYPE -maxdepth 1 -mindepth 1 -type d); do
+        echo "    $TYPE dependency: $i"
+    done
+done
+sleep 1
+echo "$PKG_NAME artifact" > $OUTPUT_ARTIFACTS_DIR/artifact.txt
